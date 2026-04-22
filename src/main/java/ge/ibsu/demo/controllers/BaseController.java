@@ -5,12 +5,21 @@ import org.apache.coyote.BadRequestException;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
 public class BaseController {
+
+    @ResponseBody
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ErrorMessage> handleUserNotFoundException(UsernameNotFoundException e) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorMessage(e.getMessage()));
+    }
 
     @ResponseBody
     @ExceptionHandler(ResourceNotFoundException.class)
