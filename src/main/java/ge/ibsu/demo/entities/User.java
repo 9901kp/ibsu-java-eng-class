@@ -3,7 +3,7 @@ package ge.ibsu.demo.entities;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
+import ge.ibsu.demo.entities.enums.Role;
 import java.util.Collection;
 import java.util.List;
 
@@ -28,9 +28,13 @@ public class User implements UserDetails {
     @Column(name = "PASSWORD")
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "ROLE")
+    private Role role;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return role != null ? role.getAuthorities() : List.of();
     }
 
     @Override
@@ -97,5 +101,13 @@ public class User implements UserDetails {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

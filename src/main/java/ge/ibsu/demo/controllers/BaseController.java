@@ -9,9 +9,17 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.security.access.AccessDeniedException;
 
 @ControllerAdvice
 public class BaseController {
+    @ResponseBody
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<ErrorMessage> handleUserAccessDeniedException(AccessDeniedException e) {
+        return ResponseEntity
+                .status(HttpStatus.FORBIDDEN)
+                .body(new ErrorMessage("forbidden_access"));
+    }
 
     @ResponseBody
     @ExceptionHandler(UsernameNotFoundException.class)

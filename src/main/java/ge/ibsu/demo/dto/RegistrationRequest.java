@@ -1,4 +1,5 @@
 package ge.ibsu.demo.dto;
+import ge.ibsu.demo.entities.enums.Role;
 
 public class RegistrationRequest {
 
@@ -6,6 +7,7 @@ public class RegistrationRequest {
     private String lastName;
     private String email;
     private String password;
+    private Role role;
 
     public String getFirstName() {
         return firstName;
@@ -37,5 +39,13 @@ public class RegistrationRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

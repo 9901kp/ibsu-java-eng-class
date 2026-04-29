@@ -10,6 +10,7 @@ import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import static ge.ibsu.demo.entities.enums.Permission.EMPLOYEE_READ;
 
 
 
@@ -35,6 +36,7 @@ public class SecurityConfiguration {
                                 .requestMatchers("/api/users/**") //Whitelist
                                 .permitAll()
                                 //.requestMatchers(HttpMethod.GET, "/api/customer/**").hasAnyAuthority(CUSTOMER_READ.getKeyword())
+                                //.requestMatchers(HttpMethod.GET, "/api/employees/**").hasAnyAuthority(EMPLOYEE_READ.getKeyword())
                                 .anyRequest()
                                 .authenticated()
                 )
