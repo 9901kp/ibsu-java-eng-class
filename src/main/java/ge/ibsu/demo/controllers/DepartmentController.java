@@ -1,13 +1,11 @@
 package ge.ibsu.demo.controllers;
 
+import ge.ibsu.demo.dto.DepartmentDto; // Не забудь импортировать DTO
 import ge.ibsu.demo.entities.Department;
 import ge.ibsu.demo.entities.Employee;
 import ge.ibsu.demo.services.DepartmentService;
 import ge.ibsu.demo.services.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,7 +14,6 @@ import java.util.List;
 public class DepartmentController {
 
     private final DepartmentService departmentService;
-
     private final EmployeeService employeeService;
 
     public DepartmentController(DepartmentService departmentService, EmployeeService employeeService) {
@@ -37,5 +34,13 @@ public class DepartmentController {
     @GetMapping("/{id}/employees")
     public List<Employee> getEmployees(@PathVariable Long id) {
         return employeeService.getByDepartment(id);
+    }
+
+    @GetMapping("/search")
+    public List<DepartmentDto> searchDepartments(
+            @RequestParam(required = false) String country,
+            @RequestParam(required = false) String city
+    ) {
+        return departmentService.searchDepartments(country, city);
     }
 }

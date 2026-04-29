@@ -1,5 +1,6 @@
 package ge.ibsu.demo.services;
 
+import ge.ibsu.demo.dto.DepartmentDto;
 import ge.ibsu.demo.entities.Department;
 import ge.ibsu.demo.repositories.DepartmentRepository;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -22,5 +23,9 @@ public class DepartmentService {
 
     public Department getById(Long id) throws Exception {
         return  departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("DEPARTMENT_NOT_FOUND"));
+    }
+
+    public List<DepartmentDto> searchDepartments(String country, String city) {
+        return departmentRepository.findDepartmentsWithFilters(country, city);
     }
 }
