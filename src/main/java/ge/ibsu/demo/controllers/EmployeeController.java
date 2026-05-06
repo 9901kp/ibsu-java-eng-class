@@ -9,6 +9,7 @@ import ge.ibsu.demo.services.EmployeeService;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.access.prepost.PreAuthorize;
+import ge.ibsu.demo.dto.EmployeeSearchDto;
 
 import java.util.List;
 
@@ -56,5 +57,11 @@ public class EmployeeController {
     @PreAuthorize("hasAuthority('employee:read')")
     public EmployeeContactInfo searchContactInfo(@RequestBody RequestData<SearchEmployee> rd) {
         return employeeService.getEmployeeContacts(rd.getData());
+    }
+
+    @GetMapping("/search-it")
+    @PreAuthorize("hasAuthority('employee:read')")
+    public Page<ge.ibsu.demo.dto.EmployeeSearchDto> searchIT(org.springframework.data.domain.Pageable pageable) {
+        return employeeService.searchIT(pageable);
     }
 }

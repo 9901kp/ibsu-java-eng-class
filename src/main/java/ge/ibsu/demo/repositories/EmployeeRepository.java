@@ -1,5 +1,6 @@
 package ge.ibsu.demo.repositories;
 
+import ge.ibsu.demo.dto.EmployeeSearchDto;
 import ge.ibsu.demo.entities.Employee;
 import ge.ibsu.demo.dto.EmployeeSummary;
 import org.springframework.data.domain.Page;
@@ -38,5 +39,9 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<EmployeeSummary> findAllProjectedBy();
 
     <T> T findByPhoneOrEmail(String phone, String email, Class<T> type);
+
+    @Query("SELECT new ge.ibsu.demo.dto.EmployeeSearchDto(e.name, e.department) " +
+            "FROM Employee e WHERE e.department = 'IT' AND e.salary BETWEEN 4000 AND 9000 ORDER BY e.name")
+    Page<EmployeeSearchDto> searchITEmployees(Pageable pageable);
 
 }

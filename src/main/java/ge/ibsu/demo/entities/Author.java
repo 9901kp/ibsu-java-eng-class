@@ -6,6 +6,9 @@ import java.util.List;
 @Entity
 public class Author {
 
+    private String title;
+    private String name;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,7 +18,6 @@ public class Author {
 
     public Author() {}
 
-    // --- Геттеры и Сеттеры ---
 
     public Long getId() {
         return id;
@@ -31,5 +33,17 @@ public class Author {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 }
