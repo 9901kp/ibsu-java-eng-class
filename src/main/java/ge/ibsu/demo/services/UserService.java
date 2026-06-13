@@ -1,8 +1,9 @@
-package ge.ibsu.demo.security.services;
+package ge.ibsu.demo.services;
 
 import ge.ibsu.demo.dto.AuthenticationResponse;
 import ge.ibsu.demo.dto.LoginData;
 import ge.ibsu.demo.dto.RegistrationRequest;
+import ge.ibsu.demo.dto.UserSummary;
 import ge.ibsu.demo.entities.User;
 import ge.ibsu.demo.repositories.UserRepository;
 import ge.ibsu.demo.security.config.JwtService;
@@ -12,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -22,6 +24,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+    @Autowired
+    private UserRepository userRepository;
 
     public UserService(UserRepository repository, PasswordEncoder passwordEncoder, JwtService jwtService, AuthenticationManager authenticationManager) {
         this.repository = repository;
@@ -55,5 +59,9 @@ public class UserService {
                 );
         var jwtToken = jwtService.generateToken(user);
         return new AuthenticationResponse(jwtToken);
+    }
+
+    public List<UserSummary> getActiveUsers() {
+        return userRepository.findActiveUsersSummary();
     }
 }

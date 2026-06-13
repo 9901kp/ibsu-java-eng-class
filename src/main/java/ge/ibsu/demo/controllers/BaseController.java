@@ -13,6 +13,7 @@ import org.springframework.security.access.AccessDeniedException;
 
 @ControllerAdvice
 public class BaseController {
+
     @ResponseBody
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorMessage> handleUserAccessDeniedException(AccessDeniedException e) {

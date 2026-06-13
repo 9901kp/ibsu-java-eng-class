@@ -3,7 +3,7 @@ package ge.ibsu.demo.security.controller;
 import ge.ibsu.demo.dto.AuthenticationResponse;
 import ge.ibsu.demo.dto.LoginData;
 import ge.ibsu.demo.dto.RegistrationRequest;
-import ge.ibsu.demo.security.services.UserService;
+import ge.ibsu.demo.services.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
