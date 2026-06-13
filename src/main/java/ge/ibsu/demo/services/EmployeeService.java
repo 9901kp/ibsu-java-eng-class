@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import ge.ibsu.demo.utils.GeneralUtil;
+import ge.ibsu.demo.dto.EmployeeSearchDto;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -72,4 +73,9 @@ public class EmployeeService {
     public EmployeeContactInfo getEmployeeContacts(SearchEmployee searchEmployee) {
         return employeeRepository.findByPhoneOrEmail(searchEmployee.getPhone(), searchEmployee.getEmail(), EmployeeContactInfo.class);
     }
+
+    public Page<ge.ibsu.demo.dto.EmployeeSearchDto> searchIT(org.springframework.data.domain.Pageable pageable) {
+        return employeeRepository.searchITEmployees(pageable);
+    }
+
 }

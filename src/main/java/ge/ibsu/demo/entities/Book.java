@@ -14,7 +14,6 @@ public class Book {
 
     public Book() {}
 
-    // --- Геттеры и Сеттеры ---
 
     public Long getId() {
         return id;
